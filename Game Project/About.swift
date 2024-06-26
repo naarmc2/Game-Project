@@ -20,6 +20,13 @@ struct AboutChildishWonders: View {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(Color(hue: 0.567, saturation: 0.473, brightness: 0.907))
                 
+                VStack(alignment: .center, content: {
+                    Image("shark")
+                        .resizable()
+                        .padding(.all, 20)
+                        .frame(height: 300.0)
+                })
+                
                 Text("Childish Wonders strives to inspire readers and help writers worldwide grow. We offer reading opportunities designed for today's youth, with stories short enough to capture attention while delivering meaningful moral messages.")
                     .font(.body)
                     .padding(.horizontal, 10.0)
@@ -28,11 +35,7 @@ struct AboutChildishWonders: View {
                     .font(.body)
                     .padding(.horizontal, 10.0)
 
-                VStack(alignment: .center, content: {
-                    Image("shark")
-                        .resizable()
-                        .padding(.all, 20)
-                })
+               
             
                     
                     
