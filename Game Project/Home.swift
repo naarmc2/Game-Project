@@ -4,6 +4,7 @@
 //
 //  Created by Nathania McKenzie on 6/24/24.
 //
+
 import SwiftUI
 
 struct Home: View {
@@ -35,27 +36,15 @@ struct Home: View {
                 }
             }
             .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1))) // Light blue background color
-
-            .navigationTitle("Home")
             .toolbar {
-                ToolbarItem {
-                    Button(action: {
-                        // Action for Library
-                    }) {
+                ToolbarItemGroup {
+                    NavigationLink(destination: Library()) {
                         Text("Library")
                     }
-                }
-                ToolbarItem {
-                    Button(action: {
-                        // Action for About
-                    }) {
+                    NavigationLink(destination: About()) {
                         Text("About")
                     }
-                }
-                ToolbarItem {
-                    Button(action: {
-                        // Action for Contact
-                    }) {
+                    NavigationLink(destination: Contact()) {
                         Text("Contact")
                     }
                 }
@@ -82,9 +71,52 @@ struct About: View {
 }
 
 struct Contact: View {
+    @State private var name: String = ""
+    @State private var email: String = ""
+    @State private var message: String = ""
+
     var body: some View {
-        Text("Contact View")
-            .navigationTitle("Contact")
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Contact Us")
+                .font(.title)
+                .padding(.bottom, 10)
+
+            Text("Please fill out the form below if you have any questions or feedback.")
+                .font(.body)
+                .foregroundColor(.gray)
+                .padding(.bottom, 20)
+
+            TextField("Name", text: $name)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal, 15)
+
+            TextField("Email", text: $email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal, 15)
+
+            TextEditor(text: $message)
+                .frame(height: 150)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
+                .padding(.horizontal, 15)
+
+            Button(action: {
+                // Action to handle form submission (e.g., sending feedback)
+                print("Submit button tapped")
+                // Implement logic to handle user input
+            }) {
+                Text("Submit")
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal, 15)
+
+            Spacer()
+        }
+        .padding()
+        .navigationTitle("Contact")
     }
 }
 

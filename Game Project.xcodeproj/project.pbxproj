@@ -62,9 +62,9 @@
 			children = (
 				41D6F6B32C29A3BF00CCB5B3 /* Game_ProjectApp.swift */,
 				41D6F6B52C29A3BF00CCB5B3 /* Home.swift */,
+				41C638662C2B389700B906F4 /* Library.swift */,
 				41C6386A2C2B6D1700B906F4 /* About.swift */,
 				41C6386C2C2B6D2500B906F4 /* Contact.swift */,
-				41C638662C2B389700B906F4 /* Library.swift */,
 				41C638682C2B38BB00B906F4 /* OpenedBook.swift */,
 				41D6F6B72C29A3C200CCB5B3 /* Assets.xcassets */,
 				41D6F6B92C29A3C200CCB5B3 /* Game_Project.entitlements */,
