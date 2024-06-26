@@ -12,19 +12,20 @@ struct Book {
     var title: String
     var genre: String
     var coverImageName: String // Property for cover image name
+    var blurb: String // Property for book blurb
 }
 
 struct LibraryPage: View {
     // Example list of books
     let books = [
-        Book(title: "Harry Potter and the Sorcerer's Stone", genre: "Fantasy", coverImageName: "mysticCat"),
-        Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "flowers"),
-        Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "jellyfish"),
-        Book(title: "Hamlet", genre: "Drama", coverImageName: "shark"),
-        Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet"),
-        Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky"),
-        Book(title: "Title", genre: "Bedtime", coverImageName: "moon"),
-        Book(title: "Add Title", genre: "Bedtime", coverImageName: "boat"),
+        Book(title: "Harry Potter and the Sorcerer's Stone", genre: "Fantasy", coverImageName: "mysticCat", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "flowers", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "jellyfish", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Hamlet", genre: "Drama", coverImageName: "shark", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Title", genre: "Bedtime", coverImageName: "moon", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Add Title", genre: "Bedtime", coverImageName: "boat", blurb: "ADD BLURB/CONTEXT HERE"),
         // Add more books as needed
     ]
     
@@ -125,11 +126,30 @@ struct BookDetailPage: View {
                 .foregroundColor(.gray)
                 .padding()
             
+            // Display book blurb
+            Text(book.blurb)
+                .font(.body)
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center) // Center align blurb
+                .padding()
+            
+            // Button to open full book details
+            NavigationLink(destination: OpenedBook()) {
+                Text("Read Full Book")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .padding(.top, 20)
+            }
+            
             Spacer()
         }
+        .padding()
+        .navigationTitle(book.title) // Set navigation title to book title
     }
 }
-
 
 struct SearchBar: View {
     @Binding var text: String
