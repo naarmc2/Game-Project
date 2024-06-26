@@ -5,6 +5,7 @@
 //  Created by Nathania McKenzie on 6/24/24.
 //
 
+
 import SwiftUI
 
 struct Home: View {
@@ -13,12 +14,16 @@ struct Home: View {
             VStack {
                 Text("WELCOME")
                     .font(.title)
-                    .foregroundColor(Color.blue) // Set color to dark blue
+                    .bold()
+                    .padding(.top, 40)
+                    .foregroundColor(Color(hue: 0.557, saturation: 0.883, brightness: 0.723)) // Set color to dark blue
 
-                Text("Welcome to our app!")
+                Text("CHILDISH WONDERER")
                     .font(.body)
-                    .foregroundColor(Color(red: 0.8313725490196079, green: 0.9215686274509803, blue: 1.0))
+                    .foregroundColor(Color(hue: 0.572, saturation: 0.808, brightness: 0.713))
                     .padding(.horizontal, 25.0)
+                    .bold()
+
 
                 ZStack {
                     Image("seaheart")
@@ -29,7 +34,7 @@ struct Home: View {
                         Text("Start Reading")
                             .foregroundColor(.white)
                             .padding()
-                            .background(Color.blue)
+                            .background(Color(hue: 0.567, saturation: 0.473, brightness: 0.907))
                             .cornerRadius(10)
                     }
                     .padding(.top, 450.0)
@@ -38,8 +43,15 @@ struct Home: View {
             .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1))) // Light blue background color
             .toolbar {
                 ToolbarItemGroup {
+                    
+                    NavigationLink(destination: LibraryPage()) {
+                                Image(systemName: "person.2")
+                                    .padding(.trailing, 100.0)
+                            }
+
                     NavigationLink(destination: LibraryPage()) {
                         Text("Library")
+                    
                     }
                     NavigationLink(destination: AboutChildishWonders()) {
                         Text("About")
