@@ -4,69 +4,113 @@
 //
 //  Created by Nathania McKenzie on 6/24/24.
 //
-
 import SwiftUI
 
 struct Home: View {
     var body: some View {
-        NavigationStack {
-            VStack{
-                Text("WELCOME ")
+        NavigationView {
+            VStack {
+                Text("WELCOME")
                     .font(.title)
-                    .foregroundColor(Color("#3d85c6ff"))
-                
-                Text("WELCOME ")
+                    .foregroundColor(Color.blue) // Set color to dark blue
+
+                Text("Welcome to our app!")
                     .font(.body)
                     .foregroundColor(Color(red: 0.8313725490196079, green: 0.9215686274509803, blue: 1.0))
                     .padding(.horizontal, 25.0)
-                ZStack{
+
+                ZStack {
                     Image("seaheart")
                         .resizable()
                         .padding(.all, 20)
-                    
 
-                    Button("Start Reading") {
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                    NavigationLink(destination: Library()) {
+                        Text("Start Reading")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
                     }
-                    .border(Color.black, width: 40)
-                    
                     .padding(.top, 450.0)
                 }
-                
             }
-            .background((Color("#d4ebff")))
+            .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1))) // Light blue background color
 
-                    .toolbar {
-                        NavigationLink(destination: Home()) {
-                            Text("Home")
-                                .underline()
-                            
-                        }
-                        NavigationLink(destination: Library()) {
-                            Text("Library")
-                                
-                                .underline()
-                        }
-                        NavigationLink(destination: About()) {
-                            Text("About")
-                                
-                                .underline()
-                        }
-                        NavigationLink(destination: Contact()) {
-                            Text("Contact")
-                               
-                                .underline()
-                        }
-
+            .navigationTitle("Home")
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {
+                        // Action for Library
+                    }) {
+                        Text("Library")
                     }
-                    .background((Color("#d4ebff")))
-
-                   
+                }
+                ToolbarItem {
+                    Button(action: {
+                        // Action for About
+                    }) {
+                        Text("About")
+                    }
+                }
+                ToolbarItem {
+                    Button(action: {
+                        // Action for Contact
+                    }) {
+                        Text("Contact")
+                    }
+                }
+            }
+        }
+        .tabItem {
+            Label("Home", systemImage: "house")
         }
     }
-
 }
 
-#Preview {
-    Home()
+struct Library: View {
+    var body: some View {
+        Text("Library View")
+            .navigationTitle("Library")
+    }
+}
+
+struct About: View {
+    var body: some View {
+        Text("About View")
+            .navigationTitle("About")
+    }
+}
+
+struct Contact: View {
+    var body: some View {
+        Text("Contact View")
+            .navigationTitle("Contact")
+    }
+}
+
+struct OpenedBook: View {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("Your Story Title")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding()
+                
+                Text("Here goes the full story content. You can extend this area to show the entire text of your stories.")
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
+                Spacer()
+            }
+        }
+        .navigationTitle("Opened Book")
+    }
+}
+
+struct Home_Previews: PreviewProvider {
+    static var previews: some View {
+        Home()
+    }
 }

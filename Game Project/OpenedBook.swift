@@ -7,12 +7,29 @@
 
 import SwiftUI
 
-struct OpenedBook: View {
+struct OpenedBookView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("Your Story Title")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding()
+                
+                Text("Here goes the full story content. You can extend this area to show the entire text of your stories.")
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
+                Spacer()
+            }
+        }
+        .navigationTitle("Opened Book")
     }
 }
 
-#Preview {
-    OpenedBook()
+struct OpenedBookView_Previews: PreviewProvider {
+    static var previews: some View {
+        OpenedBookView()
+    }
 }
