@@ -11,20 +11,20 @@ import SwiftUI
 struct Book {
     var title: String
     var genre: String
-    // You can add more properties like coverImageURL if you have images to display
+    var coverImageName: String // Property for cover image name
 }
 
 struct LibraryPage: View {
     // Example list of books
     let books = [
-        Book(title: "Harry Potter and the Sorcerer's Stone", genre: "Fantasy"),
-        Book(title: "The Hobbit", genre: "Fantasy"),
-        Book(title: "Romeo and Juliet", genre: "Drama"),
-        Book(title: "Hamlet", genre: "Drama"),
-        Book(title: "Pride and Prejudice", genre: "Romance"),
-        Book(title: "Jane Eyre", genre: "Romance"),
-        Book(title: "Title", genre: "Bedtime"),
-        Book(title: "Add Title", genre: "Bedtime"),
+        Book(title: "Harry Potter and the Sorcerer's Stone", genre: "Fantasy", coverImageName: "mysticCat"),
+        Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "flowers"),
+        Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "jellyfish"),
+        Book(title: "Hamlet", genre: "Drama", coverImageName: "shark"),
+        Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet"),
+        Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky"),
+        Book(title: "Title", genre: "Bedtime", coverImageName: "moon"),
+        Book(title: "Add Title", genre: "Bedtime", coverImageName: "boat"),
         // Add more books as needed
     ]
     
@@ -71,9 +71,10 @@ struct LibraryPage: View {
                                     ForEach(groupedBooks[genre]?.prefix(2) ?? [], id: \.title) { book in
                                         NavigationLink(destination: BookDetailPage(book: book)) {
                                             VStack {
-                                                // Placeholder for cover image (you can replace with actual images if available)
-                                                Rectangle()
-                                                    .fill(Color.gray)
+                                                // Cover Image based on book's coverImageName
+                                                Image(book.coverImageName)
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
                                                     .frame(width: 150, height: 200) // Adjust size as needed
                                                 
                                                 Text(book.title)
@@ -105,11 +106,14 @@ struct BookDetailPage: View {
     
     var body: some View {
         VStack {
-            // Placeholder for cover image (you can replace with actual image if available)
-            Rectangle()
-                .fill(Color.gray)
+            // Display the cover image
+            Image(book.coverImageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 250, height: 300) // Adjust size as needed
+                .padding()
             
+            // Display book details
             Text(book.title)
                 .font(.title)
                 .foregroundColor(.black)
@@ -125,6 +129,7 @@ struct BookDetailPage: View {
         }
     }
 }
+
 
 struct SearchBar: View {
     @Binding var text: String
