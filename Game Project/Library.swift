@@ -27,39 +27,37 @@ struct LibraryPage: View {
     ]
 
     var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
-                    ForEach(books, id: \.title) { book in
-                        NavigationLink(destination: BookDetailPage(book: book)) {
-                            VStack(alignment: .leading, spacing: 8) {
-                                // Placeholder for cover image (you can replace with actual images if available)
-                                Rectangle()
-                                    .fill(Color.gray)
-                                    .frame(width: 150, height: 200) // Adjust size as needed
-                                
-                                Text(book.title)
-                                    .font(.headline)
-                                    .foregroundColor(.black)
-                                    .multilineTextAlignment(.center) // Center align title
-                                    .padding(.horizontal, 10)
-                                    .frame(maxWidth: 150) // Limit width for alignment
+        ScrollView {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
+                ForEach(books, id: \.title) { book in
+                    NavigationLink(destination: BookDetailPage(book: book)) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            // Placeholder for cover image (you can replace with actual images if available)
+                            Rectangle()
+                                .fill(Color.gray)
+                                .frame(width: 150, height: 200) // Adjust size as needed
+                            
+                            Text(book.title)
+                                .font(.headline)
+                                .foregroundColor(.black)
+                                .multilineTextAlignment(.center) // Center align title
+                                .padding(.horizontal, 10)
+                                .frame(maxWidth: 150) // Limit width for alignment
 
-                                Text(book.genre)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                                    .multilineTextAlignment(.center) // Center align genre
-                                    .padding(.horizontal, 10)
-                                    .frame(maxWidth: 150) // Limit width for alignment
-                            }
+                            Text(book.genre)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                                .multilineTextAlignment(.center) // Center align genre
+                                .padding(.horizontal, 10)
+                                .frame(maxWidth: 150) // Limit width for alignment
                         }
-                        .buttonStyle(PlainButtonStyle()) // Remove default button styling
                     }
+                    .buttonStyle(PlainButtonStyle()) // Remove default button styling
                 }
-                .padding()
             }
-            .navigationTitle("Library")
+            .padding()
         }
+        .navigationTitle("Library")
     }
 }
 

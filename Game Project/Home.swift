@@ -25,7 +25,7 @@ struct Home: View {
                         .resizable()
                         .padding(.all, 20)
 
-                    NavigationLink(destination: Library()) {
+                    NavigationLink(destination: LibraryPage()) {
                         Text("Start Reading")
                             .foregroundColor(.white)
                             .padding()
@@ -38,10 +38,10 @@ struct Home: View {
             .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1))) // Light blue background color
             .toolbar {
                 ToolbarItemGroup {
-                    NavigationLink(destination: Library()) {
+                    NavigationLink(destination: LibraryPage()) {
                         Text("Library")
                     }
-                    NavigationLink(destination: About()) {
+                    NavigationLink(destination: AboutChildishWonders()) {
                         Text("About")
                     }
                     NavigationLink(destination: Contact()) {
