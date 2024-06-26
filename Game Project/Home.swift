@@ -5,9 +5,7 @@
 //  Created by Nathania McKenzie on 6/24/24.
 //
 
-
 import SwiftUI
-
 struct Home: View {
     var body: some View {
         NavigationView {
@@ -17,19 +15,15 @@ struct Home: View {
                     .bold()
                     .padding(.top, 40)
                     .foregroundColor(Color(hue: 0.557, saturation: 0.883, brightness: 0.723)) // Set color to dark blue
-
                 Text("CHILDISH WONDERER")
                     .font(.body)
                     .foregroundColor(Color(hue: 0.572, saturation: 0.808, brightness: 0.713))
                     .padding(.horizontal, 25.0)
                     .bold()
-
-
                 ZStack {
                     Image("seaheart")
                         .resizable()
                         .padding(.all, 20)
-
                     NavigationLink(destination: LibraryPage()) {
                         Text("Start Reading")
                             .foregroundColor(.white)
@@ -48,7 +42,6 @@ struct Home: View {
                                 Image(systemName: "person.2")
                                     .padding(.trailing, 100.0)
                             }
-
                     NavigationLink(destination: LibraryPage()) {
                         Text("Library")
                     
@@ -67,50 +60,41 @@ struct Home: View {
         }
     }
 }
-
 struct Library: View {
     var body: some View {
         Text("Library View")
             .navigationTitle("Library")
     }
 }
-
 struct About: View {
     var body: some View {
         Text("About View")
             .navigationTitle("About")
     }
 }
-
 struct Contact: View {
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var message: String = ""
-
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Contact Us")
                 .font(.title)
                 .padding(.bottom, 10)
-
             Text("Please fill out the form below if you have any questions or feedback.")
                 .font(.body)
                 .foregroundColor(.gray)
                 .padding(.bottom, 20)
-
             TextField("Name", text: $name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 15)
-
             TextField("Email", text: $email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 15)
-
             TextEditor(text: $message)
                 .frame(height: 150)
                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
                 .padding(.horizontal, 15)
-
             Button(action: {
                 // Action to handle form submission (e.g., sending feedback)
                 print("Submit button tapped")
@@ -124,14 +108,12 @@ struct Contact: View {
                     .cornerRadius(10)
             }
             .padding(.horizontal, 15)
-
             Spacer()
         }
         .padding()
         .navigationTitle("Contact")
     }
 }
-
 struct OpenedBook: View {
     var body: some View {
         ScrollView {
@@ -152,9 +134,9 @@ struct OpenedBook: View {
         .navigationTitle("Opened Book")
     }
 }
-
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
     }
 }
+
