@@ -13,59 +13,67 @@ struct Messaging: View {
     @State private var senderName: String = ""
     
     var body: some View {
-        VStack {
-            Text("Messaging")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding()
-            
-            Image(systemName: "message")
+        ZStack {
+            // Background image
+            Image("back")
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 100)
-                .padding()
-                .foregroundColor(.blue)
-            
-            Text("Connect with your friends!")
-                .font(.body)
-                .padding()
-            
-            ScrollView {
-                VStack(alignment: .leading, spacing: 10) {
-                    ForEach(messages, id: \.id) { message in
-                        MessageView(message: message)
-                    }
-                }
-                .padding()
-            }
-            .frame(maxHeight: 300)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
-                TextField("Your Name", text: $senderName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
+                Text("Messaging")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding()
                 
-                TextField("Type your message", text: $newMessageText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
+                Image(systemName: "message")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                    .padding()
+                    .foregroundColor(.blue)
                 
-                Button(action: sendMessage) {
-                    Text("Send")
-                        .padding(.horizontal)
-                        .padding(.vertical, 10)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                Text("Connect with your friends!")
+                    .font(.body)
+                    .padding()
+                
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 10) {
+                        ForEach(messages, id: \.id) { message in
+                            MessageView(message: message)
+                        }
+                    }
+                    .padding()
                 }
-                .padding(.top)
+                .frame(maxWidth: 300, maxHeight: 300)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
+                VStack {
+                    TextField("Your Name", text: $senderName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                    
+                    TextField("Type your message", text: $newMessageText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                    
+                    Button(action: sendMessage) {
+                        Text("Send")
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
+                            .foregroundColor(.white)
+                            .background(Color.blue)
+                            .cornerRadius(20)
+                    }
+                    .padding(.top)
+                }
+                .padding()
+                
+                Spacer()
             }
             .padding()
-            
-            Spacer()
         }
-        .padding()
         .navigationTitle("Messaging")
     }
     
