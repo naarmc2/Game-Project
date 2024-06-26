@@ -19,45 +19,75 @@ struct LibraryPage: View {
     let books = [
         Book(title: "Harry Potter and the Sorcerer's Stone", genre: "Fantasy"),
         Book(title: "The Hobbit", genre: "Fantasy"),
+        Book(title: "Romeo and Juliet", genre: "Drama"),
+        Book(title: "Hamlet", genre: "Drama"),
         Book(title: "Pride and Prejudice", genre: "Romance"),
-        Book(title: "To Kill a Mockingbird", genre: "Classic"),
-        Book(title: "1984", genre: "Dystopian"),
-        Book(title: "The Catcher in the Rye", genre: "Literary Fiction")
+        Book(title: "Jane Eyre", genre: "Romance"),
+        Book(title: "Add Title", genre: "Bedtime"),
+        Book(title: "Add Titlee", genre: "Bedtime"),
         // Add more books as needed
     ]
-
+    
+    @State private var searchText = ""
+    
+    var filteredBooks: [Book] {
+        if searchText.isEmpty {
+            return books
+        } else {
+            return books.filter { $0.title.localizedCaseInsensitiveContains(searchText) || $0.genre.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+    
+    var groupedBooks: [String: [Book]] {
+        Dictionary(grouping: filteredBooks, by: { $0.genre })
+    }
+    
+    var genres: [String] {
+        groupedBooks.keys.sorted()
+    }
+    
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
-                ForEach(books, id: \.title) { book in
-                    NavigationLink(destination: BookDetailPage(book: book)) {
-                        VStack(alignment: .leading, spacing: 8) {
-                            // Placeholder for cover image (you can replace with actual images if available)
-                            Rectangle()
-                                .fill(Color.gray)
-                                .frame(width: 150, height: 200) // Adjust size as needed
+        NavigationView {
+            VStack {
+                SearchBar(text: $searchText)
+                
+                ScrollView {
+                    ForEach(genres, id: \.self) { genre in
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text(genre)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding(.horizontal)
+                                .padding(.top, 20)
                             
-                            Text(book.title)
-                                .font(.headline)
-                                .foregroundColor(.black)
-                                .multilineTextAlignment(.center) // Center align title
-                                .padding(.horizontal, 10)
-                                .frame(maxWidth: 150) // Limit width for alignment
-
-                            Text(book.genre)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                                .multilineTextAlignment(.center) // Center align genre
-                                .padding(.horizontal, 10)
-                                .frame(maxWidth: 150) // Limit width for alignment
+                            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
+                                ForEach(groupedBooks[genre]?.prefix(2) ?? [], id: \.title) { book in
+                                    NavigationLink(destination: BookDetailPage(book: book)) {
+                                        VStack {
+                                            // Placeholder for cover image (you can replace with actual images if available)
+                                            Rectangle()
+                                                .fill(Color.gray)
+                                                .frame(width: 150, height: 200) // Adjust size as needed
+                                            
+                                            Text(book.title)
+                                                .font(.headline)
+                                                .foregroundColor(.black)
+                                                .multilineTextAlignment(.center) // Center align title
+                                                .padding(.horizontal, 10)
+                                                .frame(maxWidth: 150) // Limit width for alignment
+                                        }
+                                        .padding(.bottom, 20) // Add padding below each book item
+                                    }
+                                    .buttonStyle(PlainButtonStyle()) // Remove default button styling
+                                }
+                            }
+                            .padding(.horizontal)
                         }
                     }
-                    .buttonStyle(PlainButtonStyle()) // Remove default button styling
                 }
+                .navigationTitle("Library")
             }
-            .padding()
         }
-        .navigationTitle("Library")
     }
 }
 
@@ -66,16 +96,45 @@ struct BookDetailPage: View {
     
     var body: some View {
         VStack {
+            // Placeholder for cover image (you can replace with actual image if available)
+            Rectangle()
+                .fill(Color.gray)
+                .frame(width: 250, height: 300) // Adjust size as needed
+            
             Text(book.title)
                 .font(.title)
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center) // Center align title
                 .padding()
+            
             Text("Genre: \(book.genre)")
                 .font(.headline)
                 .foregroundColor(.gray)
                 .padding()
+            
             Spacer()
         }
         .navigationTitle(book.title)
+    }
+}
+
+struct SearchBar: View {
+    @Binding var text: String
+    
+    var body: some View {
+        HStack {
+            TextField("Search books", text: $text)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
+            
+            Button(action: {
+                text = ""
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.gray)
+                    .padding(.trailing)
+            }
+        }
     }
 }
 
