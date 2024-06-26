@@ -23,8 +23,8 @@ struct LibraryPage: View {
         Book(title: "Hamlet", genre: "Drama"),
         Book(title: "Pride and Prejudice", genre: "Romance"),
         Book(title: "Jane Eyre", genre: "Romance"),
+        Book(title: "Title", genre: "Bedtime"),
         Book(title: "Add Title", genre: "Bedtime"),
-        Book(title: "Add Titlee", genre: "Bedtime"),
         // Add more books as needed
     ]
     
@@ -48,45 +48,54 @@ struct LibraryPage: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                SearchBar(text: $searchText)
+            ZStack {
+                // Background Image
+                Image("potentialBackground")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
                 
-                ScrollView {
-                    ForEach(genres, id: \.self) { genre in
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(genre)
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .padding(.horizontal)
-                                .padding(.top, 20)
-                            
-                            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
-                                ForEach(groupedBooks[genre]?.prefix(2) ?? [], id: \.title) { book in
-                                    NavigationLink(destination: BookDetailPage(book: book)) {
-                                        VStack {
-                                            // Placeholder for cover image (you can replace with actual images if available)
-                                            Rectangle()
-                                                .fill(Color.gray)
-                                                .frame(width: 150, height: 200) // Adjust size as needed
-                                            
-                                            Text(book.title)
-                                                .font(.headline)
-                                                .foregroundColor(.black)
-                                                .multilineTextAlignment(.center) // Center align title
-                                                .padding(.horizontal, 10)
-                                                .frame(maxWidth: 150) // Limit width for alignment
+                VStack {
+                    SearchBar(text: $searchText)
+                    
+                    ScrollView {
+                        ForEach(genres, id: \.self) { genre in
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text(genre)
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .padding(.horizontal)
+                                    .padding(.top, 20)
+                                
+                                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
+                                    ForEach(groupedBooks[genre]?.prefix(2) ?? [], id: \.title) { book in
+                                        NavigationLink(destination: BookDetailPage(book: book)) {
+                                            VStack {
+                                                // Placeholder for cover image (you can replace with actual images if available)
+                                                Rectangle()
+                                                    .fill(Color.gray)
+                                                    .frame(width: 150, height: 200) // Adjust size as needed
+                                                
+                                                Text(book.title)
+                                                    .font(.headline)
+                                                    .foregroundColor(.black)
+                                                    .multilineTextAlignment(.center) // Center align title
+                                                    .padding(.horizontal, 10)
+                                                    .frame(maxWidth: 150) // Limit width for alignment
+                                            }
+                                            .padding(.bottom, 20) // Add padding below each book item
                                         }
-                                        .padding(.bottom, 20) // Add padding below each book item
+                                        .buttonStyle(PlainButtonStyle()) // Remove default button styling
                                     }
-                                    .buttonStyle(PlainButtonStyle()) // Remove default button styling
                                 }
+                                .padding(.horizontal)
                             }
-                            .padding(.horizontal)
                         }
                     }
                 }
-                .navigationTitle("Library")
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .navigationTitle("Library") // Set navigation title directly
         }
     }
 }
@@ -114,7 +123,6 @@ struct BookDetailPage: View {
             
             Spacer()
         }
-        .navigationTitle(book.title)
     }
 }
 
