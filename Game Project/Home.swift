@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 struct Home: View {
     var body: some View {
         NavigationView {
@@ -15,15 +16,18 @@ struct Home: View {
                     .bold()
                     .padding(.top, 40)
                     .foregroundColor(Color(hue: 0.557, saturation: 0.883, brightness: 0.723)) // Set color to dark blue
+                
                 Text("CHILDISH WONDERER")
                     .font(.body)
                     .foregroundColor(Color(hue: 0.572, saturation: 0.808, brightness: 0.713))
                     .padding(.horizontal, 25.0)
                     .bold()
+                
                 ZStack {
                     Image("seaheart")
                         .resizable()
                         .padding(.all, 20)
+                    
                     NavigationLink(destination: LibraryPage()) {
                         Text("Start Reading")
                             .foregroundColor(.white)
@@ -37,14 +41,12 @@ struct Home: View {
             .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1))) // Light blue background color
             .toolbar {
                 ToolbarItemGroup {
-                    
-                    NavigationLink(destination: LibraryPage()) {
-                                Image(systemName: "person.2")
-                                    .padding(.trailing, 100.0)
-                            }
+                    NavigationLink(destination: Messaging()) { // Changed to Messaging instead of MessagingView
+                        Image(systemName: "person.2")
+                            .padding(.trailing, 100.0)
+                    }
                     NavigationLink(destination: LibraryPage()) {
                         Text("Library")
-                    
                     }
                     NavigationLink(destination: AboutChildishWonders()) {
                         Text("About")
@@ -60,22 +62,26 @@ struct Home: View {
         }
     }
 }
+
 struct Library: View {
     var body: some View {
         Text("Library View")
             .navigationTitle("Library")
     }
 }
+
 struct About: View {
     var body: some View {
         Text("About View")
             .navigationTitle("About")
     }
 }
+
 struct Contact: View {
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var message: String = ""
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Contact Us")
@@ -114,6 +120,7 @@ struct Contact: View {
         .navigationTitle("Contact")
     }
 }
+
 struct OpenedBook: View {
     var body: some View {
         ScrollView {
@@ -134,9 +141,9 @@ struct OpenedBook: View {
         .navigationTitle("Opened Book")
     }
 }
+
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
     }
 }
-
