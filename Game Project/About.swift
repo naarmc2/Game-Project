@@ -41,7 +41,7 @@ struct AboutChildishWonders: View {
                 }
                 .padding()
             }
-            .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1))) // Light blue background color
+            .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1))) 
             
         }
     }
