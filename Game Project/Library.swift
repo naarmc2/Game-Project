@@ -117,6 +117,7 @@ struct SavedLibraryPage: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding()
+                .foregroundColor(Color.blue) // Set text color to pretty blue
             
             ScrollView {
                 ForEach(savedBooks, id: \.id) { book in
@@ -140,9 +141,17 @@ struct SavedLibraryPage: View {
                 }
             }
         }
-        .navigationTitle("Saved Books")
+        .background(
+            Image("potentialBackground") // Set background image
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+        )
     }
 }
+
+
+
 
 struct BookDetailPage: View {
     var book: Book
