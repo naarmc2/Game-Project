@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B4886B92C2C9C9600FE403F /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4886B82C2C9C9600FE403F /* Messaging.swift */; };
+		0B4887062C2DED0600FE403F /* OpenedBook2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4887052C2DED0600FE403F /* OpenedBook2.swift */; };
 		41C638672C2B389700B906F4 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C638662C2B389700B906F4 /* Library.swift */; };
 		41C638692C2B38BB00B906F4 /* OpenedBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C638682C2B38BB00B906F4 /* OpenedBook.swift */; };
 		41C6386B2C2B6D1700B906F4 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6386A2C2B6D1700B906F4 /* About.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		0B4886B82C2C9C9600FE403F /* Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
+		0B4887052C2DED0600FE403F /* OpenedBook2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedBook2.swift; sourceTree = "<group>"; };
 		41C638662C2B389700B906F4 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		41C638682C2B38BB00B906F4 /* OpenedBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedBook.swift; sourceTree = "<group>"; };
 		41C6386A2C2B6D1700B906F4 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				41C6386A2C2B6D1700B906F4 /* About.swift */,
 				41C6386C2C2B6D2500B906F4 /* Contact.swift */,
 				41C638682C2B38BB00B906F4 /* OpenedBook.swift */,
+				0B4887052C2DED0600FE403F /* OpenedBook2.swift */,
 				41D6F6B72C29A3C200CCB5B3 /* Assets.xcassets */,
 				41D6F6B92C29A3C200CCB5B3 /* Game_Project.entitlements */,
 				41D6F6BA2C29A3C200CCB5B3 /* Preview Content */,
@@ -158,6 +161,7 @@
 				0B4886B92C2C9C9600FE403F /* Messaging.swift in Sources */,
 				41C6386B2C2B6D1700B906F4 /* About.swift in Sources */,
 				41D6F6B62C29A3BF00CCB5B3 /* Home.swift in Sources */,
+				0B4887062C2DED0600FE403F /* OpenedBook2.swift in Sources */,
 				41C638692C2B38BB00B906F4 /* OpenedBook.swift in Sources */,
 				41D6F6B42C29A3BF00CCB5B3 /* Game_ProjectApp.swift in Sources */,
 				41C638672C2B389700B906F4 /* Library.swift in Sources */,
