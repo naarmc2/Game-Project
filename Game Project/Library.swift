@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 struct Book: Identifiable {
     var id = UUID()
     var title: String
@@ -13,17 +14,18 @@ struct Book: Identifiable {
     var coverImageName: String
     var blurb: String
 }
+
 struct LibraryPage: View {
     @State private var searchText = ""
     @State private var savedBooks: [Book] = []
     
     let books = [
         Book(title: "Harry Potter", genre: "Fantasy", coverImageName: "harry", blurb: "Unbridled magic & sorcery. Do you dare to tread further?"),
-                Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "hobbit", blurb: "Short men who make big differences in a medivial setting."),
-                Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "swan", blurb: "Not even deathly dispute can quell the love between the next heirs of Montague and Capulet families"),
-                Book(title: "Hamlet", genre: "Drama", coverImageName: "hamlet", blurb: "Is blood really thicker than water? Prince Hamlet can tell you all about that..."),
-                Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet", blurb: "Don't let your pride stop you from being with the love of your life. One life, one chance, don't waste it"),
-                Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky", blurb: "Feminisim at its core! No one can stop a woman hard at work."),
+        Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "hobbit", blurb: "Short men who make big differences in a medieval setting."),
+        Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "swan", blurb: "Not even deathly dispute can quell the love between the next heirs of Montague and Capulet families."),
+        Book(title: "Hamlet", genre: "Drama", coverImageName: "hamlet", blurb: "Is blood really thicker than water? Prince Hamlet can tell you all about that..."),
+        Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet", blurb: "Don't let your pride stop you from being with the love of your life. One life, one chance, don't waste it."),
+        Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky", blurb: "Feminism at its core! No one can stop a woman hard at work."),
         Book(title: "Title", genre: "Bedtime", coverImageName: "moon", blurb: "ADD BLURB/CONTEXT HERE"),
         Book(title: "Ocean Serenity", genre: "Bedtime", coverImageName: "boat", blurb: "Sea torrents and hurricanes cannot stop this girl from finding her missing father. Follow the journey of Coral as she dives into deep waters and discovers a whole new world under the sea."),
     ]
@@ -105,6 +107,7 @@ struct LibraryPage: View {
         }
     }
 }
+
 struct SavedLibraryPage: View {
     @Binding var savedBooks: [Book]
     
@@ -140,67 +143,69 @@ struct SavedLibraryPage: View {
         .navigationTitle("Saved Books")
     }
 }
+
 struct BookDetailPage: View {
     var book: Book
     @Binding var savedBooks: [Book]
     
     var body: some View {
-        VStack {
-            Image(book.coverImageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 250, height: 300)
-                .padding()
-            
-            Text(book.title)
-                .font(.title)
-                .foregroundColor(.black)
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            Text("Genre: \(book.genre)")
-                .font(.headline)
-                .foregroundColor(.gray)
-                .padding()
-            
-            Text(book.blurb)
-                .font(.body)
-                .foregroundColor(.black)
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            HStack {
-                NavigationLink(destination: OpenedBook()) {
-                    Text("Read Full Book")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        .padding(.top, 20)
-                }
+        ScrollView {
+            VStack {
+                Image(book.coverImageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 250, height: 300)
+                    .padding()
                 
-                Button(action: {
-                    if !savedBooks.contains(where: { $0.id == book.id }) {
-                        savedBooks.append(book)
+                Text(book.title)
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
+                Text("Genre: \(book.genre)")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                    .padding()
+                
+                Text(book.blurb)
+                    .font(.body)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
+                HStack {
+                    NavigationLink(destination: OpenedBook()) {
+                        Text("Read Full Book")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .padding(.top, 20)
                     }
-                }) {
-                    Text("Save to My Library")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.green)
-                        .cornerRadius(10)
-                        .padding(.top, 20)
+                    
+                    Button(action: {
+                        if !savedBooks.contains(where: { $0.id == book.id }) {
+                            savedBooks.append(book)
+                        }
+                    }) {
+                        Text("Save to My Library")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.green)
+                            .cornerRadius(10)
+                            .padding(.top, 20)
+                    }
                 }
             }
-            
-            Spacer()
+            .padding()
         }
-        .padding()
         .navigationTitle(book.title)
     }
 }
+
 struct SearchBar: View {
     @Binding var text: String
     
@@ -220,6 +225,7 @@ struct SearchBar: View {
         }
     }
 }
+
 struct LibraryPage_Previews: PreviewProvider {
     static var previews: some View {
         LibraryPage()
