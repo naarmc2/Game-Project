@@ -11,7 +11,7 @@ struct Home: View {
         NavigationView {
             VStack {
                 Text("WELCOME")
-                    .font(.title)
+                    .font(.custom("Arial Rounded MT Bold", size: 32))
                     .bold()
                     .padding(.top, 40)
                     .foregroundColor(Color(hue: 0.557, saturation: 0.883, brightness: 0.723)) 
