@@ -21,7 +21,7 @@ struct Messaging: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Messaging")
+                Text("Friends List")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding()

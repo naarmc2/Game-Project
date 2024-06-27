@@ -18,14 +18,14 @@ struct Book {
 struct LibraryPage: View {
     // Example list of books
     let books = [
-        Book(title: "Harry Potter and the Sorcerer's Stone", genre: "Fantasy", coverImageName: "mysticCat", blurb: "ADD BLURB/CONTEXT HERE"),
-        Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "flowers", blurb: "ADD BLURB/CONTEXT HERE"),
-        Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "jellyfish", blurb: "ADD BLURB/CONTEXT HERE"),
-        Book(title: "Hamlet", genre: "Drama", coverImageName: "shark", blurb: "ADD BLURB/CONTEXT HERE"),
-        Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet", blurb: "ADD BLURB/CONTEXT HERE"),
-        Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Harry Potter", genre: "Fantasy", coverImageName: "harry", blurb: "Unbridled magic & sorcery. Do you dare to tread further?"),
+        Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "hobbit", blurb: "Short men who make big differences in a medivial setting."),
+        Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "swan", blurb: "Not even deathly dispute can quell the love between the next heirs of Montague and Capulet families"),
+        Book(title: "Hamlet", genre: "Drama", coverImageName: "hamlet", blurb: "Is blood really thicker than water? Prince Hamlet can tell you all about that..."),
+        Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet", blurb: "Don't let your pride stop you from being with the love of your life. One life, one chance, don't waste it"),
+        Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky", blurb: "Feminisim at its core! No one can stop a woman hard at work."),
         Book(title: "Title", genre: "Bedtime", coverImageName: "moon", blurb: "ADD BLURB/CONTEXT HERE"),
-        Book(title: "Add Title", genre: "Bedtime", coverImageName: "boat", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Ocean Serenity", genre: "Bedtime", coverImageName: "boat", blurb: "Sea torrents and hurricanes cannot stop this girl from finding her missing father. Follow the journey of Coral as she dives into deep waters and discovers a whole new world under the sea."),
         // Add more books as needed
     ]
     
@@ -80,7 +80,7 @@ struct LibraryPage: View {
                                                 
                                                 Text(book.title)
                                                     .font(.headline)
-                                                    .foregroundColor(.black)
+                                                    .foregroundColor(Color(hue: 0.557, saturation: 0.954, brightness: 0.952))
                                                     .multilineTextAlignment(.center) // Center align title
                                                     .padding(.horizontal, 10)
                                                     .frame(maxWidth: 150) // Limit width for alignment
@@ -98,6 +98,7 @@ struct LibraryPage: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Library") // Set navigation title directly
+            .foregroundColor(Color(hue: 0.557, saturation: 0.949, brightness: 0.7))
         }
     }
 }
@@ -131,7 +132,9 @@ struct BookDetailPage: View {
                 .font(.body)
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center) // Center align blurb
-                .padding()
+                .fixedSize(horizontal: false, vertical: true)
+
+
             
             // Button to open full book details
             NavigationLink(destination: OpenedBook()) {
