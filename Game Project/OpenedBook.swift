@@ -32,7 +32,7 @@ struct OpenedBookView: View {
                 }
                 
                 Button(action: {
-                    // Simulate translation for demonstration
+                    
                     if isTranslated {
                         translatedText = "Here goes the full story content. You can extend this area to show the entire text of your stories."
                     } else {

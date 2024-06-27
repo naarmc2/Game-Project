@@ -149,68 +149,71 @@ struct BookDetailPage: View {
     @Binding var savedBooks: [Book]
     
     var body: some View {
-        ZStack {
-            Image("back") // Assuming "back" is your background image asset
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-            
-            ScrollView {
-                VStack {
-                    Image(book.coverImageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 250, height: 300)
-                        .padding()
-                    
-                    Text(book.title)
-                        .font(.title)
-                        .fontWeight(.bold) // Enhance boldness for a cute look
-                        .foregroundColor(Color.blue.opacity(0.8)) // Pretty blue color with opacity
-                        .multilineTextAlignment(.center)
-                        .padding()
-                    
-                    Text("Genre: \(book.genre)")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                        .padding()
-                    
-                    Text(book.blurb)
-                        .font(.body)
-                        .foregroundColor(.black)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                    
-                    HStack {
-                        NavigationLink(destination: OpenedBookView()) {
-                            Text("Read Full Book")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                                .padding(.top, 20)
-                        }
+        NavigationView {
+            ZStack {
+                Image("back")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+                
+                ScrollView {
+                    VStack {
+                        Image(book.coverImageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 250, height: 300)
+                            .padding()
                         
-                        Button(action: {
-                            if !savedBooks.contains(where: { $0.id == book.id }) {
-                                savedBooks.append(book)
+                        Text(book.title)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.blue.opacity(0.8))
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        
+                        Text("Genre: \(book.genre)")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                            .padding()
+                        
+                        Text(book.blurb)
+                            .font(.body)
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        
+                        HStack {
+                            NavigationLink(destination: OpenedBookView()) {
+                                Text("Read Full Book")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
+                                    .padding(.top, 20)
                             }
-                        }) {
-                            Text("Save to My Library")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.green)
-                                .cornerRadius(10)
-                                .padding(.top, 20)
+                            
+                            Button(action: {
+                                if !savedBooks.contains(where: { $0.id == book.id }) {
+                                    savedBooks.append(book)
+                                }
+                            }) {
+                                Text("Save to My Library")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.green)
+                                    .cornerRadius(10)
+                                    .padding(.top, 20)
+                            }
                         }
                     }
+                    .padding()
                 }
-                .padding()
             }
+            .navigationTitle("")
+            .navigationBarHidden(true) 
         }
-        .navigationTitle(book.title)
     }
 }
 

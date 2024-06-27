@@ -14,7 +14,7 @@ struct Home: View {
                     .font(.title)
                     .bold()
                     .padding(.top, 40)
-                    .foregroundColor(Color(hue: 0.557, saturation: 0.883, brightness: 0.723)) // Set color to dark blue
+                    .foregroundColor(Color(hue: 0.557, saturation: 0.883, brightness: 0.723)) 
                 
                 Text("CHILDISH WONDERER")
                     .font(.body)
@@ -37,10 +37,10 @@ struct Home: View {
                     .padding(.top, 450.0)
                 }
             }
-            .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1))) // Light blue background color
+            .background(Color(#colorLiteral(red: 0.831372549, green: 0.9215686275, blue: 1, alpha: 1)))
             .toolbar {
                 ToolbarItemGroup {
-                    NavigationLink(destination: Messaging()) { // Changed to Messaging instead of MessagingView
+                    NavigationLink(destination: Messaging()) {
                         Image(systemName: "person.2")
                             .padding(.trailing, 100.0)
                     }
@@ -98,9 +98,9 @@ struct Contact: View {
                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
                 .padding(.horizontal, 15)
             Button(action: {
-                // Action to handle form submission (e.g., sending feedback)
+                
                 print("Submit button tapped")
-                // Implement logic to handle user input
+                
             }) {
                 Text("Submit")
                     .foregroundColor(.white)
