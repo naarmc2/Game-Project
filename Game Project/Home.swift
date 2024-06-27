@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct Home: View {
     var body: some View {
         NavigationView {
@@ -62,21 +61,18 @@ struct Home: View {
         }
     }
 }
-
 struct Library: View {
     var body: some View {
         Text("Library View")
             .navigationTitle("Library")
     }
 }
-
 struct About: View {
     var body: some View {
         Text("About View")
             .navigationTitle("About")
     }
 }
-
 struct Contact: View {
     @State private var name: String = ""
     @State private var email: String = ""
@@ -120,7 +116,6 @@ struct Contact: View {
         .navigationTitle("Contact")
     }
 }
-
 struct OpenedBook: View {
     var body: some View {
         ScrollView {
@@ -141,7 +136,6 @@ struct OpenedBook: View {
         .navigationTitle("Opened Book")
     }
 }
-
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
