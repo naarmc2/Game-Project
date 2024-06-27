@@ -6,30 +6,27 @@
 //
 
 import SwiftUI
-
-// Define a Book struct to hold book information
-struct Book {
+struct Book: Identifiable {
+    var id = UUID()
     var title: String
     var genre: String
-    var coverImageName: String // Property for cover image name
-    var blurb: String // Property for book blurb
+    var coverImageName: String
+    var blurb: String
 }
-
 struct LibraryPage: View {
-    // Example list of books
-    let books = [
-        Book(title: "Harry Potter", genre: "Fantasy", coverImageName: "harry", blurb: "Unbridled magic & sorcery. Do you dare to tread further?"),
-        Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "hobbit", blurb: "Short men who make big differences in a medivial setting."),
-        Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "swan", blurb: "Not even deathly dispute can quell the love between the next heirs of Montague and Capulet families"),
-        Book(title: "Hamlet", genre: "Drama", coverImageName: "hamlet", blurb: "Is blood really thicker than water? Prince Hamlet can tell you all about that..."),
-        Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet", blurb: "Don't let your pride stop you from being with the love of your life. One life, one chance, don't waste it"),
-        Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky", blurb: "Feminisim at its core! No one can stop a woman hard at work."),
-        Book(title: "Title", genre: "Bedtime", coverImageName: "moon", blurb: "ADD BLURB/CONTEXT HERE"),
-        Book(title: "Ocean Serenity", genre: "Bedtime", coverImageName: "boat", blurb: "Sea torrents and hurricanes cannot stop this girl from finding her missing father. Follow the journey of Coral as she dives into deep waters and discovers a whole new world under the sea."),
-        // Add more books as needed
-    ]
-    
     @State private var searchText = ""
+    @State private var savedBooks: [Book] = []
+    
+    let books = [
+        Book(title: "Harry Potter and the Sorcerer's Stone", genre: "Fantasy", coverImageName: "mysticCat", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "The Hobbit", genre: "Fantasy", coverImageName: "flowers", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Romeo and Juliet", genre: "Drama", coverImageName: "jellyfish", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Hamlet", genre: "Drama", coverImageName: "shark", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Title", genre: "Bedtime", coverImageName: "moon", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Add Title", genre: "Bedtime", coverImageName: "boat", blurb: "ADD BLURB/CONTEXT HERE"),
+    ]
     
     var filteredBooks: [Book] {
         if searchText.isEmpty {
@@ -50,7 +47,6 @@ struct LibraryPage: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Background Image
                 Image("potentialBackground")
                     .resizable()
                     .scaledToFill()
@@ -69,25 +65,24 @@ struct LibraryPage: View {
                                     .padding(.top, 20)
                                 
                                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
-                                    ForEach(groupedBooks[genre]?.prefix(2) ?? [], id: \.title) { book in
-                                        NavigationLink(destination: BookDetailPage(book: book)) {
+                                    ForEach(groupedBooks[genre] ?? [], id: \.id) { book in
+                                        NavigationLink(destination: BookDetailPage(book: book, savedBooks: $savedBooks)) {
                                             VStack {
-                                                // Cover Image based on book's coverImageName
                                                 Image(book.coverImageName)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
-                                                    .frame(width: 150, height: 200) // Adjust size as needed
+                                                    .frame(width: 150, height: 200)
                                                 
                                                 Text(book.title)
                                                     .font(.headline)
-                                                    .foregroundColor(Color(hue: 0.557, saturation: 0.954, brightness: 0.952))
-                                                    .multilineTextAlignment(.center) // Center align title
+                                                    .foregroundColor(.black)
+                                                    .multilineTextAlignment(.center)
                                                     .padding(.horizontal, 10)
-                                                    .frame(maxWidth: 150) // Limit width for alignment
+                                                    .frame(maxWidth: 150)
                                             }
-                                            .padding(.bottom, 20) // Add padding below each book item
+                                            .padding(.bottom, 20)
                                         }
-                                        .buttonStyle(PlainButtonStyle()) // Remove default button styling
+                                        .buttonStyle(PlainButtonStyle())
                                     }
                                 }
                                 .padding(.horizontal)
@@ -97,29 +92,69 @@ struct LibraryPage: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationTitle("Library") // Set navigation title directly
-            .foregroundColor(Color(hue: 0.557, saturation: 0.949, brightness: 0.7))
+            .navigationTitle("Library")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: SavedLibraryPage(savedBooks: $savedBooks)) {
+                        Image(systemName: "bookmark.fill")
+                            .foregroundColor(.blue)
+                    }
+                }
+            }
         }
     }
 }
-
-struct BookDetailPage: View {
-    var book: Book
+struct SavedLibraryPage: View {
+    @Binding var savedBooks: [Book]
     
     var body: some View {
         VStack {
-            // Display the cover image
+            Text("Saved Books")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding()
+            
+            ScrollView {
+                ForEach(savedBooks, id: \.id) { book in
+                    NavigationLink(destination: BookDetailPage(book: book, savedBooks: $savedBooks)) {
+                        VStack {
+                            Image(book.coverImageName)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 150, height: 200)
+                            
+                            Text(book.title)
+                                .font(.headline)
+                                .foregroundColor(.black)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 10)
+                                .frame(maxWidth: 150)
+                        }
+                        .padding(.bottom, 20)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+            }
+        }
+        .navigationTitle("Saved Books")
+    }
+}
+struct BookDetailPage: View {
+    var book: Book
+    @Binding var savedBooks: [Book]
+    
+    var body: some View {
+        VStack {
             Image(book.coverImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 250, height: 300) // Adjust size as needed
+                .frame(width: 250, height: 300)
                 .padding()
             
-            // Display book details
             Text(book.title)
                 .font(.title)
                 .foregroundColor(.black)
-                .multilineTextAlignment(.center) // Center align title
+                .multilineTextAlignment(.center)
                 .padding()
             
             Text("Genre: \(book.genre)")
@@ -127,33 +162,44 @@ struct BookDetailPage: View {
                 .foregroundColor(.gray)
                 .padding()
             
-            // Display book blurb
             Text(book.blurb)
                 .font(.body)
                 .foregroundColor(.black)
-                .multilineTextAlignment(.center) // Center align blurb
-                .fixedSize(horizontal: false, vertical: true)
-
-
+                .multilineTextAlignment(.center)
+                .padding()
             
-            // Button to open full book details
-            NavigationLink(destination: OpenedBook()) {
-                Text("Read Full Book")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    .padding(.top, 20)
+            HStack {
+                NavigationLink(destination: OpenedBook()) {
+                    Text("Read Full Book")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                        .padding(.top, 20)
+                }
+                
+                Button(action: {
+                    if !savedBooks.contains(where: { $0.id == book.id }) {
+                        savedBooks.append(book)
+                    }
+                }) {
+                    Text("Save to My Library")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.green)
+                        .cornerRadius(10)
+                        .padding(.top, 20)
+                }
             }
             
             Spacer()
         }
         .padding()
-        .navigationTitle(book.title) // Set navigation title to book title
+        .navigationTitle(book.title)
     }
 }
-
 struct SearchBar: View {
     @Binding var text: String
     
@@ -173,7 +219,6 @@ struct SearchBar: View {
         }
     }
 }
-
 struct LibraryPage_Previews: PreviewProvider {
     static var previews: some View {
         LibraryPage()
