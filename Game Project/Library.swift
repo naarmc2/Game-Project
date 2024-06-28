@@ -24,7 +24,7 @@ struct LibraryPage: View {
         Book(title: "Hamlet", genre: "Drama", coverImageName: "hamlet", blurb: "Is blood really thicker than water? Prince Hamlet can tell you all about that..."),
         Book(title: "Pride and Prejudice", genre: "Romance", coverImageName: "planet", blurb: "Don't let your pride stop you from being with the love of your life. One life, one chance, don't waste it."),
         Book(title: "Jane Eyre", genre: "Romance", coverImageName: "sky", blurb: "Feminism at its core! No one can stop a woman hard at work."),
-        Book(title: "Cinders", genre: "Bedtime", coverImageName: "moon", blurb: "ADD BLURB/CONTEXT HERE"),
+        Book(title: "Cinders", genre: "Bedtime", coverImageName: "moon", blurb: "An evil stepmother is no match for true love! Claim your glass slipper and enter into royalty."),
         Book(title: "Ocean Serenity", genre: "Bedtime", coverImageName: "boat", blurb: "Sea torrents and hurricanes cannot stop this girl from finding her missing father. Follow the journey of Coral as she dives into deep waters and discovers a whole new world under the sea."),
     ]
     
